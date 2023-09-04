@@ -7,7 +7,6 @@ import {
   flexbox,
   Button,
 } from "@chakra-ui/react";
-import ColorModeSwitch from "./ColorModeSwitch";
 import { AiFillGithub } from "react-icons/ai";
 
 const NavBar = () => {

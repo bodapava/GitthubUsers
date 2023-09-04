@@ -16,7 +16,6 @@ function App() {
       gridTemplateColumns={"150px 1fr"}
       h="100vh"
       gap="1"
-      color="blackAlpha.700"
       fontWeight="bold">
       <GridItem pl="2" area={"header"}>
         <NavBar></NavBar>

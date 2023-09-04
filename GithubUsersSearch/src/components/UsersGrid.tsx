@@ -4,11 +4,12 @@ import UsersCards from "./UsersCards";
 
 const UsersGrid = () => {
   const { users } = useUsers();
+  console.log("users grid");
   return (
     <>
       {users.map((user) => {
-        <HStack spacing="24px" key={user.id}>
-          <Box w="40px" h="40px">
+        <HStack key={user.id}>
+          <Box>
             <UsersCards
               user={user}
               key={user.id}></UsersCards>

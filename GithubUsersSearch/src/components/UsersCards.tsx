@@ -17,17 +17,21 @@ import useUsers, {
 interface Props {
   user: User;
 }
-const UsersCards = ({ user }: Props) => {
-  // const { users } = useUsers();
+const UsersCards = () => {
+  const { users, isloading, error } = useUsers();
+  console.log("user cards", users);
   return (
     <>
-      <Card key={user.id}>
-        <CardBody>
-          <Image src={user.avatar_url} />
-        </CardBody>
-        <Divider />
-        <CardFooter></CardFooter>
-      </Card>
+      {!isloading &&
+        users.map((user) => {
+          <Card key={user.id}>
+            <CardBody>
+              <Image src={user.avatar_url} />
+            </CardBody>
+            <Divider />
+            <CardFooter></CardFooter>
+          </Card>;
+        })}
     </>
   );
 };

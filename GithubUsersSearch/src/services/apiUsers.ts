@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const apiUsers = axios.create({
+export default axios.create({
   baseURL: "https://api.github.com/",
 });
-export default apiUsers;

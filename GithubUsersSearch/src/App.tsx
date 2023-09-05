@@ -5,6 +5,7 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import NavBar from "./components/NavBar";
 import UsersCards from "./components/UsersCards";
 import UsersGrid from "./components/UsersGrid";
+import useUsers from "./hooks/useUsers";
 
 function App() {
   return (
@@ -25,14 +26,14 @@ function App() {
         bg="pink.300"
         area={"nav"}></GridItem>
       <GridItem pl="2" area={"main"}>
-        <UsersGrid></UsersGrid>
+        <UsersCards></UsersCards>
       </GridItem>
-      <GridItem
+      {/* <GridItem
         pl="2"
         bg="blue.300"
         area={"footer"}>
         Footer
-      </GridItem>
+      </GridItem> */}
     </Grid>
   );
 }

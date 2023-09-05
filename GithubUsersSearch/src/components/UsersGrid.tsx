@@ -1,21 +1,32 @@
-import { Box, HStack } from "@chakra-ui/react";
+import {
+  Box,
+  HStack,
+  Spinner,
+  Text,
+} from "@chakra-ui/react";
 import useUsers from "../hooks/useUsers";
 import UsersCards from "./UsersCards";
+import UsersCardContainer from "./UsersCardContainer";
 
 const UsersGrid = () => {
-  const { users } = useUsers();
-  console.log("users grid");
+  const { users, isloading, error } = useUsers();
+  console.log("users grid", users);
+
   return (
     <>
-      {users.map((user) => {
-        <HStack key={user.id}>
-          <Box>
+      {isloading && (
+        <>
+          <Spinner color="red.500"></Spinner>
+        </>
+      )}
+      {/* {users.length &&
+        users.map((user) => {
+          <UsersCardContainer key={user.id}>
             <UsersCards
-              user={user}
-              key={user.id}></UsersCards>
-          </Box>
-        </HStack>;
-      })}
+              key={user.id}
+              user={user}></UsersCards>
+          </UsersCardContainer>;
+        })} */}
     </>
   );
 };

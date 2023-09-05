@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import apiUsers from "../services/apiUsers";
+import { CanceledError } from "axios";
 
 export interface User {
   login: string;
@@ -10,19 +11,32 @@ export interface User {
 
 const useUsers = () => {
   const [users, setUsers] = useState<User[]>([]);
-  console.log("came here");
+  const [isloading, setIsloading] =
+    useState(false);
+  const [error, setError] = useState("");
   useEffect(() => {
-    //const controller = new AbortController();
+    const controller = new AbortController();
+    setIsloading(true);
     apiUsers
-      .get<User[]>("/users")
+      .get("/users", {
+        signal: controller.signal,
+      })
       .then((res) => {
         console.log(res.data);
         setUsers(res.data);
+        setIsloading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        if (err instanceof CanceledError) return;
+        setError(err.message);
+        setIsloading(false);
+      });
+    return () => {
+      controller.abort();
+    };
   }, []);
 
-  return { users };
+  return { users, isloading, error };
 };
 
 export default useUsers;

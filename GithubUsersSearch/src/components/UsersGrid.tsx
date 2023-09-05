@@ -1,6 +1,7 @@
 import {
   Box,
   HStack,
+  SimpleGrid,
   Spinner,
   Text,
 } from "@chakra-ui/react";
@@ -10,24 +11,19 @@ import UsersCardContainer from "./UsersCardContainer";
 
 const UsersGrid = () => {
   const { users, isloading, error } = useUsers();
-  console.log("users grid", users);
 
   return (
-    <>
-      {isloading && (
-        <>
-          <Spinner color="red.500"></Spinner>
-        </>
-      )}
-      {/* {users.length &&
-        users.map((user) => {
-          <UsersCardContainer key={user.id}>
-            <UsersCards
-              key={user.id}
-              user={user}></UsersCards>
-          </UsersCardContainer>;
-        })} */}
-    </>
+    <SimpleGrid
+      columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}
+      spacing={4}
+      padding={10}
+      overflow={"hidden"}>
+      {users.map((user) => (
+        <UsersCardContainer key={user.id}>
+          <UsersCards user={user}></UsersCards>
+        </UsersCardContainer>
+      ))}
+    </SimpleGrid>
   );
 };
 

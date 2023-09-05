@@ -9,9 +9,9 @@ const UsersCardContainer = ({
   children,
 }: Props) => {
   return (
-    <>
-      <Box>{children}</Box>
-    </>
+    <Box overflow={"hidden"} borderRadius={10}>
+      {children}
+    </Box>
   );
 };
 

@@ -23,10 +23,10 @@ function App() {
       </GridItem>
       <GridItem
         pl="2"
-        bg="pink.300"
+        bg="beige"
         area={"nav"}></GridItem>
       <GridItem pl="2" area={"main"}>
-        <UsersCards></UsersCards>
+        <UsersGrid></UsersGrid>
       </GridItem>
       {/* <GridItem
         pl="2"

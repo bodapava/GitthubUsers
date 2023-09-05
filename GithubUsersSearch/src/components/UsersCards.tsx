@@ -8,7 +8,7 @@ import {
   Heading,
   Stack,
   Image,
-  PropsOf,
+  Text,
 } from "@chakra-ui/react";
 import useUsers, {
   User,
@@ -17,21 +17,24 @@ import useUsers, {
 interface Props {
   user: User;
 }
-const UsersCards = () => {
-  const { users, isloading, error } = useUsers();
-  console.log("user cards", users);
+const UsersCards = ({ user }: Props) => {
   return (
     <>
-      {!isloading &&
-        users.map((user) => {
-          <Card key={user.id}>
-            <CardBody>
-              <Image src={user.avatar_url} />
-            </CardBody>
-            <Divider />
-            <CardFooter></CardFooter>
-          </Card>;
-        })}
+      <Card
+        key={user.id}
+        borderRadius={10}
+        style={{ backgroundColor: "beige" }}>
+        <CardBody>
+          <Image
+            src={user.avatar_url}
+            borderRadius={"50%"}
+          />
+          <Text fontFamily={"cursive"}>
+            {user.login}
+          </Text>
+        </CardBody>
+        <CardFooter></CardFooter>
+      </Card>
     </>
   );
 };

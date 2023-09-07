@@ -9,7 +9,10 @@ const UsersCardContainer = ({
   children,
 }: Props) => {
   return (
-    <Box overflow={"hidden"} borderRadius={10}>
+    <Box
+      overflow={"hidden"}
+      borderRadius={10}
+      boxShadow={"10px 5px 5px grey"}>
       {children}
     </Box>
   );

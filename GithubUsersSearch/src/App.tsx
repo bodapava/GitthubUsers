@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { SetStateAction, useState } from "react";
 import reactLogo from "./assets/react.svg";
 import "./App.css";
 import { Grid, GridItem } from "@chakra-ui/react";
@@ -6,8 +6,10 @@ import NavBar from "./components/NavBar";
 import UsersCards from "./components/UsersCards";
 import UsersGrid from "./components/UsersGrid";
 import useUsers from "./hooks/useUsers";
+import SideBar from "./components/SideBar";
 
 function App() {
+  const [isSearch, setSearch] = useState(false);
   return (
     <Grid
       templateAreas={`"header header"
@@ -21,10 +23,9 @@ function App() {
       <GridItem pl="2" area={"header"}>
         <NavBar></NavBar>
       </GridItem>
-      <GridItem
-        pl="2"
-        bg="beige"
-        area={"nav"}></GridItem>
+      <GridItem pl="2" bg="beige" area={"nav"}>
+        <SideBar></SideBar>
+      </GridItem>
       <GridItem pl="2" area={"main"}>
         <UsersGrid></UsersGrid>
       </GridItem>

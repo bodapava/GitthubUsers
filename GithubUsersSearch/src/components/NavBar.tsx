@@ -1,13 +1,15 @@
 import {
-  FormControl,
-  FormLabel,
   HStack,
-  Text,
   Input,
   flexbox,
   Button,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
+
+interface Props {
+  onSearchText: () => void;
+}
 
 const NavBar = () => {
   return (
@@ -25,10 +27,10 @@ const NavBar = () => {
           placeholder="Search for a user"
           size="sm"
           borderRadius={8}
+          onChange={(event) =>
+            console.log(event.target.value)
+          }
         />
-        <Button colorScheme="messenger" size="sm">
-          Search
-        </Button>
       </HStack>
     </>
   );

@@ -14,6 +14,7 @@ import {
   Wrap,
   WrapItem,
   Avatar,
+  Spinner,
 } from "@chakra-ui/react";
 import useRepos from "../hooks/useRepos";
 import useUsers from "../hooks/useUsers";
@@ -23,9 +24,18 @@ const RepositoryCardList = ({
   onClose,
   user,
 }: any) => {
-  if (!isopen) return null;
   let userloginName = user.login;
-  const { repos } = useRepos({ userloginName });
+  const { repos, loading, error } = useRepos({
+    userloginName,
+  });
+  if (error)
+    return (
+      <>
+        <Text fontSize="6xl" color={"red"}>
+          {error}
+        </Text>
+      </>
+    );
   return (
     <>
       <Modal
@@ -49,15 +59,18 @@ const RepositoryCardList = ({
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text fontWeight="bold" mb="1rem">
-              <OrderedList>
-                {repos.slice(0, 5).map((repo) => (
-                  <ListItem key={repo.id}>
+            {loading && <Spinner />}
+            <OrderedList>
+              {repos.slice(0, 5).map((repo) => (
+                <ListItem key={repo.id}>
+                  <Text
+                    fontWeight="bold"
+                    mb="1rem">
                     {repo.name}
-                  </ListItem>
-                ))}
-              </OrderedList>
-            </Text>
+                  </Text>
+                </ListItem>
+              ))}
+            </OrderedList>
           </ModalBody>
         </ModalContent>
       </Modal>

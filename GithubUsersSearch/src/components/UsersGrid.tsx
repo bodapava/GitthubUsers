@@ -11,7 +11,14 @@ import UsersCardContainer from "./UsersCardContainer";
 
 const UsersGrid = () => {
   const { users, isloading, error } = useUsers();
-
+  if (error)
+    return (
+      <>
+        <Text fontSize="6xl" color={"red"}>
+          {error}
+        </Text>
+      </>
+    );
   return (
     <SimpleGrid
       columns={{ sm: 1, md: 2, lg: 3, xl: 5 }}

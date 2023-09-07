@@ -18,18 +18,16 @@ interface Props {
 const UsersCards = ({ user }: Props) => {
   const [isopen, setIsopen] = useState(false);
   const [url, setUrl] = useState("");
-  console.log(isopen);
   return (
     <>
       <Card key={user.id} borderRadius={10}>
-        <CardBody>
+        <CardBody margin={0}>
           <Image
             src={user.avatar_url}
             borderRadius={"50%"}
+            boxSize="200px"
           />
-          <Text fontFamily={"cursive"}>
-            {user.login}
-          </Text>
+          <Text as="em">{user.login}</Text>
           <Text fontFamily={"cursive"}>
             Repos:{""}
             <Link

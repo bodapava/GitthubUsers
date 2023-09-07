@@ -17,6 +17,7 @@ interface Props {
 }
 const UsersCards = ({ user }: Props) => {
   const [isopen, setIsopen] = useState(false);
+  const [url, setUrl] = useState("");
   console.log(isopen);
   return (
     <>
@@ -29,20 +30,21 @@ const UsersCards = ({ user }: Props) => {
           <Text fontFamily={"cursive"}>
             {user.login}
           </Text>
-
           <Text fontFamily={"cursive"}>
             Repos:{""}
-            <Link onClick={() => setIsopen(true)}>
+            <Link
+              onClick={() => {
+                setIsopen(true);
+                setUrl(user.login);
+              }}>
               {user.repos_url}
             </Link>
           </Text>
           <RepositoryCardList
             isopen={isopen}
-            onClose={() =>
-              setIsopen(false)
-            }></RepositoryCardList>
+            onClose={() => setIsopen(false)}
+            user={user}></RepositoryCardList>
         </CardBody>
-        <CardFooter></CardFooter>
       </Card>
     </>
   );

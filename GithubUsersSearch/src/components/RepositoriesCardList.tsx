@@ -1,40 +1,82 @@
-import { Button, Text } from "@chakra-ui/react";
-
-const OVERLAY_STYLES = {
-  position: "fixed",
-  top: 0,
-  left: 0,
-  right: 0,
-  bottom: 0,
-  backgroundColor: "rgba(0,0,0,.7)",
-  zIndex: 1000,
-};
-
-const REPOCARDS_STYLE = {
-  position: "fixed",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  backgroundColor: "#FFF",
-  zIndex: 1000,
-  padding: "100px",
-};
+import {
+  Button,
+  Text,
+  CloseButton,
+  OrderedList,
+  ListItem,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  ModalCloseButton,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Wrap,
+  WrapItem,
+  Avatar,
+} from "@chakra-ui/react";
+import useRepos from "../hooks/useRepos";
+import useUsers from "../hooks/useUsers";
 
 const RepositoryCardList = ({
   isopen,
   onClose,
+  user,
 }: any) => {
-  console.log("child", isopen);
   if (!isopen) return null;
+  let userloginName = user.login;
+  const { repos } = useRepos({ userloginName });
   return (
     <>
-      <div style={OVERLAY_STYLES}></div>
-      <div style={REPOCARDS_STYLE}>
-        <Button onClick={onClose}>Close</Button>
-        <Text>Repos Card List</Text>
-      </div>
+      <Modal
+        blockScrollOnMount={false}
+        isOpen={isopen}
+        onClose={onClose}>
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>
+            <Wrap>
+              <WrapItem>
+                <Avatar
+                  name={user.login}
+                  src={user.avatar_url}
+                />
+                <Text>
+                  The 5 repos of {user.login} are
+                </Text>
+              </WrapItem>
+            </Wrap>
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text fontWeight="bold" mb="1rem">
+              <OrderedList>
+                {repos.slice(0, 5).map((repo) => (
+                  <ListItem key={repo.id}>
+                    {repo.name}
+                  </ListItem>
+                ))}
+              </OrderedList>
+            </Text>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };
+{
+  /* <div style={OVERLAY_STYLES}></div>
+
+      <div style={REPOCARDS_STYLE}>
+        <CloseButton onClick={onClose} />
+        <OrderedList>
+          {repos.slice(0, 5).map((repo) => (
+            <ListItem key={repo.id}>
+              {repo.description}
+            </ListItem>
+          ))}
+        </OrderedList>
+      </div> */
+}
 
 export default RepositoryCardList;

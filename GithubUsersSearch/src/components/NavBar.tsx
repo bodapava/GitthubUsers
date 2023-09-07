@@ -8,10 +8,11 @@ import { useState } from "react";
 import { AiFillGithub } from "react-icons/ai";
 
 interface Props {
-  onSearchText: () => void;
+  setSearch: any;
 }
 
-const NavBar = () => {
+const NavBar = ({ setSearch }: Props) => {
+  const [searchText, isSearchText] = useState("");
   return (
     <>
       <HStack
@@ -27,9 +28,10 @@ const NavBar = () => {
           placeholder="Search for a user"
           size="sm"
           borderRadius={8}
-          onChange={(event) =>
-            console.log(event.target.value)
-          }
+          onChange={(event) => {
+            isSearchText(event.target.value);
+            setSearch(searchText);
+          }}
         />
       </HStack>
     </>

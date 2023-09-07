@@ -16,16 +16,19 @@ function App() {
                   "nav main"
                   "nav footer"`}
       gridTemplateRows={"50px 1fr 30px"}
-      gridTemplateColumns={"150px 1fr"}
+      gridTemplateColumns={" 1fr"}
       h="100vh"
       gap="1"
       fontWeight="bold">
       <GridItem pl="2" area={"header"}>
-        <NavBar></NavBar>
+        <NavBar
+          setSearch={(value: any) =>
+            console.log(value)
+          }></NavBar>
       </GridItem>
-      <GridItem pl="2" bg="beige" area={"nav"}>
+      {/* <GridItem pl="2" bg="beige" area={"nav"}>
         <SideBar></SideBar>
-      </GridItem>
+      </GridItem> */}
       <GridItem pl="2" area={"main"}>
         <UsersGrid></UsersGrid>
       </GridItem>

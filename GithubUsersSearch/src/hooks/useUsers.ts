@@ -22,7 +22,7 @@ const useUsers = () => {
         signal: controller.signal,
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setUsers(res.data);
         setIsloading(false);
       })

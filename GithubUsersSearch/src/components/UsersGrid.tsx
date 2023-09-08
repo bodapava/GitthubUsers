@@ -9,7 +9,10 @@ import useUsers from "../hooks/useUsers";
 import UsersCards from "./UsersCards";
 import UsersCardContainer from "./UsersCardContainer";
 
-const UsersGrid = () => {
+interface Props {
+  navsearch: string;
+}
+const UsersGrid = ({ navsearch }: Props) => {
   const { users, isloading, error } = useUsers();
   if (error)
     return (

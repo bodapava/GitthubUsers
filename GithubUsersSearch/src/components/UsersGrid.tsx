@@ -14,6 +14,7 @@ interface Props {
 }
 const UsersGrid = ({ navsearch }: Props) => {
   const { users, isloading, error } = useUsers();
+  console.log(navsearch);
   if (error)
     return (
       <>

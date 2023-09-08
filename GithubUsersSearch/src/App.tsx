@@ -9,7 +9,7 @@ import useUsers from "./hooks/useUsers";
 import SideBar from "./components/SideBar";
 
 function App() {
-  const [isSearch, setSearch] = useState(false);
+  const [navsearch, isNavSearch] = useState("");
   return (
     <Grid
       templateAreas={`"header header"
@@ -23,14 +23,15 @@ function App() {
       <GridItem pl="2" area={"header"}>
         <NavBar
           setSearch={(value: any) =>
-            console.log(value)
+            isNavSearch(value)
           }></NavBar>
       </GridItem>
       {/* <GridItem pl="2" bg="beige" area={"nav"}>
         <SideBar></SideBar>
       </GridItem> */}
       <GridItem pl="2" area={"main"}>
-        <UsersGrid></UsersGrid>
+        <UsersGrid
+          navsearch={navsearch}></UsersGrid>
       </GridItem>
       {/* <GridItem
         pl="2"

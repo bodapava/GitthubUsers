@@ -24,7 +24,7 @@ const useRepos = ({ userloginName }: Props) => {
         signal: controller.signal,
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
         setRepos(res.data);
         isLoading(false);
       })

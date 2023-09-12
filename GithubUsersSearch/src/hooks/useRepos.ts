@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import apiUsers from "../services/apiUsers";
-import { CanceledError } from "axios";
+import axios, { CanceledError } from "axios";
+import useUsers from "./useUsers";
 
 export interface Repos {
   id: string;
@@ -16,29 +17,35 @@ const useRepos = ({ userloginName }: Props) => {
   const [repos, setRepos] = useState<Repos[]>([]);
   const [loading, isLoading] = useState(false);
   const [error, setError] = useState("");
-  useEffect(() => {
-    const controller = new AbortController();
-    isLoading(true);
-    apiUsers
-      .get(`/users/${userloginName}/repos`, {
-        signal: controller.signal,
-        headers: {
-          Authorization: `ithub_pat_11A3FNRWQ0bDkgSycrT9CG_1mK6Tc1qm4uXJ7FaFke1ThRNz0RqTlyWCddm0QI5edsEKPDDSZG3sjd0y7f`,
-        },
-      })
-      .then((res) => {
-        setRepos(res.data);
-        isLoading(false);
-      })
-      .catch((err) => {
-        if (err instanceof CanceledError) return;
-        setError(err.message);
-        isLoading(false);
-      });
-    return () => {
-      controller.abort();
-    };
-  }, []);
+  const { users } = useUsers();
+  if (userloginName) {
+    useEffect(() => {
+      const controller = new AbortController();
+      isLoading(true);
+      axios
+        .get(`/users/${userloginName}/repos`, {
+          signal: controller.signal,
+          params: {
+            cache: true,
+          },
+        })
+        .then((res) => {
+          if (res.data) {
+            setRepos(res.data);
+            isLoading(false);
+          }
+        })
+        .catch((err) => {
+          if (err instanceof CanceledError)
+            return;
+          setError(err.message);
+          isLoading(false);
+        });
+      return () => {
+        controller.abort();
+      };
+    }, [users]);
+  }
   return { repos, loading, error };
 };
 

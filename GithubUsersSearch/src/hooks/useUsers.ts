@@ -20,14 +20,14 @@ const useUsers = () => {
     apiUsers
       .get("/users", {
         signal: controller.signal,
-        headers: {
-          Authorization: `ithub_pat_11A3FNRWQ0bDkgSycrT9CG_1mK6Tc1qm4uXJ7FaFke1ThRNz0RqTlyWCddm0QI5edsEKPDDSZG3sjd0y7f`,
-        },
+        params: { cache: true },
       })
       .then((res) => {
         //console.log(res.data);
-        setUsers(res.data);
-        setIsloading(false);
+        if (res.data) {
+          setUsers(res.data);
+          setIsloading(false);
+        }
       })
       .catch((err) => {
         if (err instanceof CanceledError) return;

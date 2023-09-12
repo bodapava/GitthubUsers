@@ -29,10 +29,10 @@ const NavBar = ({ setSearch }: Props) => {
           size="sm"
           borderRadius={8}
           onChange={(event) => {
-            isSearchText(event.target.value);
-            setSearch(searchText);
+            setSearch(event.target.value);
           }}
         />
+        <Button>Search</Button>
       </HStack>
     </>
   );

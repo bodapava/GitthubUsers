@@ -14,7 +14,15 @@ interface Props {
 }
 const UsersGrid = ({ navsearch }: Props) => {
   const { users, isloading, error } = useUsers();
-  console.log(navsearch);
+  let filteredUsers =
+    navsearch.length > 0
+      ? users.filter((user) =>
+          user.login
+            .toLowerCase()
+            .startsWith(navsearch.toLowerCase())
+        )
+      : users;
+  console.log(filteredUsers);
   if (error)
     return (
       <>
@@ -29,7 +37,7 @@ const UsersGrid = ({ navsearch }: Props) => {
       spacing={4}
       padding={10}
       overflow={"hidden"}>
-      {users.map((user) => (
+      {filteredUsers.map((user) => (
         <UsersCardContainer key={user.id}>
           <UsersCards user={user}></UsersCards>
         </UsersCardContainer>
